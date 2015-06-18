@@ -25,11 +25,6 @@ class AssetBundle extends \yii\web\AssetBundle
     public $js = self::KRAJEE_ASSET;
     public $css = self::KRAJEE_ASSET;
     public $sourcePath = self::KRAJEE_PATH;    
-    public $depends = [
-        'yii\web\JqueryAsset',
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-    ];
 
     /**
      * @inheritdoc
@@ -44,6 +39,13 @@ class AssetBundle extends \yii\web\AssetBundle
         }
         if ($this->sourcePath === self::KRAJEE_PATH) {
             $this->sourcePath = null;
+        }
+        if (!\Yii::$app->getRequest()->getIsAjax()) {
+            $this->depends = [
+                'yii\web\JqueryAsset',
+		        'yii\web\YiiAsset',
+		        'yii\bootstrap\BootstrapAsset',
+            ];
         }
     }
     
